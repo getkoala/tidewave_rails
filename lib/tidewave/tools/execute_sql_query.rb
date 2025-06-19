@@ -45,4 +45,6 @@ class Tidewave::Tools::ExecuteSqlQuery < Tidewave::Tools::Base
       database: Rails.configuration.database_configuration.dig(Rails.env, "database")
     }
   end
+
+  def self.tool_tags; []; end
 end

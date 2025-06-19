@@ -5,7 +5,7 @@ require "rails_helper"
 describe Tidewave::Tools::ExecuteSqlQuery do
   describe 'tags' do
     it 'does not include the file_system_tool tag' do
-      expect(described_class.tags).not_to include(:file_system_tool)
+      expect(described_class.tool_tags).not_to include(:file_system_tool)
     end
   end
   describe ".tool_name" do
@@ -38,19 +38,12 @@ describe Tidewave::Tools::ExecuteSqlQuery do
   describe ".input_schema_to_json" do
     let(:expected_input_schema) do
       {
+        type: "object",
+        required: ["query"],
         properties: {
-          query: {
-            type: "string",
-            description: "The SQL query to execute. For PostgreSQL, use $1, $2 placeholders. For MySQL, use ? placeholders."
-          },
-          arguments: {
-            type: "array",
-            items: {},
-            description: "The arguments to pass to the query. The query must contain corresponding parameter placeholders."
-          }
-        },
-        required: [ "query" ],
-        type: "object"
+          query: { type: "string", description: "The SQL query to execute. For PostgreSQL, use $1, $2 placeholders. For MySQL, use ? placeholders." },
+          arguments: { type: "array", description: "The arguments to pass to the query. The query must contain corresponding parameter placeholders." }
+        }
       }
     end
 

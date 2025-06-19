@@ -3,7 +3,7 @@
 describe Tidewave::Tools::ShellEval do
   describe 'tags' do
     it 'includes the file_system_tool tag' do
-      expect(described_class.tags).to include(:file_system_tool)
+      expect(described_class.tool_tags).to include(:file_system_tool)
     end
   end
 

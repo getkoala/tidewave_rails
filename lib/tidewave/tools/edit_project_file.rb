@@ -3,7 +3,7 @@
 require "tidewave/file_tracker"
 
 class Tidewave::Tools::EditProjectFile < Tidewave::Tools::Base
-  tags :file_system_tool
+  def self.tool_tags; [:file_system_tool]; end
 
   tool_name "edit_project_file"
   description <<~DESCRIPTION
@@ -26,7 +26,7 @@ class Tidewave::Tools::EditProjectFile < Tidewave::Tools::Base
     required(:path).filled(:string).description("The path to the file to edit. It is relative to the project root.")
     required(:old_string).filled(:string).description("The string to search for")
     required(:new_string).filled(:string).description("The string to replace the old_string with")
-    optional(:atime).filled(:integer).hidden.description("The Unix timestamp this file was last accessed. Not to be used.")
+    optional(:atime).filled(:integer).description("The Unix timestamp this file was last accessed. Not to be used.")
   end
 
   def call(path:, old_string:, new_string:, atime: nil)

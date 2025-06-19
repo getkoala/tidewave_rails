@@ -19,4 +19,6 @@ class Tidewave::Tools::GetLogs < Tidewave::Tools::Base
     logs = File.readlines(log_file).last(tail)
     logs.join
   end
+
+  def self.tool_tags; []; end
 end

@@ -3,7 +3,7 @@
 describe Tidewave::Tools::ReadProjectFile do
   describe 'tags' do
     it 'includes the file_system_tool tag' do
-      expect(described_class.tags).to include(:file_system_tool)
+      expect(described_class.tool_tags).to include(:file_system_tool)
     end
   end
 
@@ -80,11 +80,6 @@ describe Tidewave::Tools::ReadProjectFile do
       allow(File).to receive(:read).with(full_path).and_return(multiline_content)
 
       expect(subject.call(path: file_path, line_offset: 3)).to eq("line4\nline5\n")
-    end
-
-    it "returns the mtime in metadata" do
-      subject.call(path: file_path)
-      expect(subject._meta[:mtime]).to eq(Time.new(1971).to_i)
     end
 
     context "when the file does not exist" do

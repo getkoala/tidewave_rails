@@ -38,4 +38,6 @@ class Tidewave::Tools::GetPackageLocation < Tidewave::Tools::Base
       end.join("\n")
     end
   end
+
+  def self.tool_tags; []; end
 end

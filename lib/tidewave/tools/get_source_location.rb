@@ -57,4 +57,6 @@ class Tidewave::Tools::GetSourceLocation < Tidewave::Tools::Base
       mod.method(method_name).source_location
     end
   end
+
+  def self.tool_tags; []; end
 end

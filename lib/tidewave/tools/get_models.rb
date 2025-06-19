@@ -24,4 +24,6 @@ class Tidewave::Tools::GetModels < Tidewave::Tools::Base
       { name: association.name, type: association.macro }
     end.compact_blank
   end
+
+  def self.tool_tags; []; end
 end

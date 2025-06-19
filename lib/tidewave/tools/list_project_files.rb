@@ -3,7 +3,7 @@
 require "tidewave/file_tracker"
 
 class Tidewave::Tools::ListProjectFiles < Tidewave::Tools::Base
-  tags :file_system_tool
+  def self.tool_tags; [:file_system_tool]; end
 
   tool_name "list_project_files"
   description <<~DESC

@@ -5,7 +5,7 @@ require "rails_helper"
 describe Tidewave::Tools::GetModels do
   describe 'tags' do
     it 'does not include the file_system_tool tag' do
-      expect(described_class.tags).not_to include(:file_system_tool)
+      expect(described_class.tool_tags).not_to include(:file_system_tool)
     end
   end
 

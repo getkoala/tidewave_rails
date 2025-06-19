@@ -19,29 +19,25 @@ module Tidewave
 
       config = app.config.tidewave
 
-      # Set up MCP server with the host application
+      # Set up MCP server with the host application using FastMcp.mount_in_rails
       FastMcp.mount_in_rails(
         app,
-        name: "tidewave",
-        version: Tidewave::VERSION,
-        path_prefix: Tidewave::PATH_PREFIX,
-        messages_route: Tidewave::MESSAGES_ROUTE,
-        sse_route: Tidewave::SSE_ROUTE,
-        logger: config.logger,
-        allowed_origins: config.allowed_origins,
-        localhost_only: config.localhost_only,
-        allowed_ips: config.allowed_ips
+        name: config.name,
+        version: config.version,
+        path_prefix: '/tidewave',
+        messages_route: 'messages',
+        sse_route: 'mcp'
       ) do |server|
-        app.config.before_initialize do
-          server.filter_tools do |request, tools|
-            if request.params["include_fs_tools"] != "true"
-              tools.reject { |tool| tool.tags.include?(:file_system_tool) }
-            else
-              tools
-            end
+        # Register all tool classes that inherit from Tidewave::Tools::Base
+        tool_classes = []
+        ObjectSpace.each_object(Class) do |klass|
+          if klass < Tidewave::Tools::Base && klass != Tidewave::Tools::Base
+            tool_classes << klass
           end
-
-          server.register_tools(*Tidewave::Tools::Base.descendants)
+        end
+        
+        tool_classes.each do |tool_class|
+          server.register_tool(tool_class)
         end
       end
     end

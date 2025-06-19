@@ -40,4 +40,6 @@ class Tidewave::Tools::PackageSearch < Tidewave::Tools::Base
       raise "RubyGems API request failed with status code: #{response.code}"
     end
   end
+
+  def self.tool_tags; []; end
 end

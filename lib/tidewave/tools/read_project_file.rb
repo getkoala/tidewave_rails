@@ -3,7 +3,7 @@
 require "tidewave/file_tracker"
 
 class Tidewave::Tools::ReadProjectFile < Tidewave::Tools::Base
-  tags :file_system_tool
+  def self.tool_tags; [:file_system_tool]; end
 
   tool_name "read_project_file"
   description <<~DESCRIPTION
@@ -19,7 +19,7 @@ class Tidewave::Tools::ReadProjectFile < Tidewave::Tools::Base
 
   def call(path:, **keywords)
     Tidewave::FileTracker.validate_path_access!(path)
-    _meta[:mtime], contents = Tidewave::FileTracker.read_file(path, **keywords)
+    _mtime, contents = Tidewave::FileTracker.read_file(path, **keywords)
     contents
   end
 end

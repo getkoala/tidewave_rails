@@ -45,4 +45,6 @@ class Tidewave::Tools::ProjectEval < Tidewave::Tools::Base
       $stderr = original_stderr
     end
   end
+
+  def self.tool_tags; []; end
 end
